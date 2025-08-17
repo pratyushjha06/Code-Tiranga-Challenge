@@ -1,0 +1,241 @@
+:root {
+    --saffron: #FF9933;
+    --white: #FFFFFF;
+    --green: #138808;
+    --navy: #000080;
+    --dark-bg: #1a202c;
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--dark-bg);
+    color: #E2E8F0;
+    cursor: none;
+}
+
+.font-teko { font-family: 'Teko', sans-serif; }
+
+.cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--saffron);
+    transition: transform 0.1s ease-out;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+}
+.cursor-dot {
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    background-color: var(--white);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--dark-bg);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#preloader .chakra {
+    width: 80px;
+    height: 80px;
+    animation: spin 2s linear infinite;
+}
+#preloader .loading-text {
+    margin-top: 20px;
+    font-family: 'Teko', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    color: var(--saffron);
+}
+
+#hero {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+.hero-content {
+    z-index: 2;
+}
+.hero-title span {
+    display: inline-block;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+}
+
+#timeline {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background-image: url('https://images.unsplash.com/photo-1622464730923-7b20163a7965?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+}
+#timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(26, 32, 44, 0.6);
+    z-index: 1;
+}
+.timeline-chakra-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 2;
+}
+.timeline-chakra {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(calc(-50% + 50px), calc(-50% - 50px));
+    width: 80vh;
+    height: 80vh;
+    max-width: 80vw;
+    max-height: 80vw;
+    animation: spin 60s linear infinite;
+}
+.timeline-container {
+    display: flex;
+    width: 600%;
+    height: 100vh;
+    position: relative;
+    z-index: 3;
+}
+.timeline-panel {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+.timeline-card {
+    max-width: 600px;
+    text-align: center;
+    background: rgba(26, 32, 44, 0.5);
+    backdrop-filter: blur(5px);
+    padding: 2.5rem;
+    border-radius: 1rem;
+}
+
+.gallery-image {
+    clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+    transition: clip-path 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+.gallery-image:hover {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    transform: scale(1.05);
+}
+
+.tribute-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    transition: transform 0.4s ease;
+}
+.tribute-card:hover {
+    transform: translateY(-10px);
+}
+.tribute-card .details {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    padding: 2rem 1.5rem 1.5rem;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+}
+.tribute-card:hover .details {
+    transform: translateY(0);
+}
+.tribute-card .name {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    transition: opacity 0.4s ease;
+}
+.tribute-card:hover .name {
+    opacity: 0;
+}
+
+#voices {
+    background-image: url('https://images.unsplash.com/photo-1598135753163-6167c1a1ad25?q=80&w=1932');
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+}
+
+#pledge-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 60;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    opacity: 0;
+}
+#pledge-modal {
+    position: relative;
+    transform: scale(0.7);
+}
+#confetti-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.reveal-text {
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+}

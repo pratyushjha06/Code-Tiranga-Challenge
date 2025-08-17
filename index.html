@@ -7,289 +7,28 @@
     <meta name="description" content="An immersive, interactive celebration of India's 79th Independence Day. Explore the journey, culture, and future of a vibrant nation. A 10/10 web experience.">
     <meta name="keywords" content="India, Independence Day, 10/10 Website, Interactive, Animation, GSAP, Web Competition, Freedom Day">
     
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇮🇳</text></svg>">
+    <link rel="icon" href="/assets/Ashoka_Chakra.svg.png" type="image/svg+xml">
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Icon Library -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Custom CSS -->
-    <style>
-        :root {
-            --saffron: #FF9933;
-            --white: #FFFFFF;
-            --green: #138808;
-            --navy: #000080;
-            --dark-bg: #1a202c;
-        }
-
-        /* CRITICAL: Prevents scrollbars from the wide timeline */
-        html, body {
-            overflow-x: hidden;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--dark-bg);
-            color: #E2E8F0;
-            cursor: none; /* Hide default cursor */
-        }
-
-        .font-teko { font-family: 'Teko', sans-serif; }
-
-        /* Custom Cursor */
-        .cursor {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--saffron);
-            transition: transform 0.1s ease-out;
-            pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: difference;
-        }
-        .cursor-dot {
-            position: fixed;
-            width: 4px;
-            height: 4px;
-            background-color: var(--white);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-        }
-
-        /* Preloader */
-        #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--dark-bg);
-            z-index: 10000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        #preloader .chakra {
-            width: 80px;
-            height: 80px;
-            animation: spin 2s linear infinite;
-        }
-        #preloader .loading-text {
-            margin-top: 20px;
-            font-family: 'Teko', sans-serif;
-            font-size: 1.5rem;
-            letter-spacing: 2px;
-            color: var(--saffron);
-        }
-
-        /* Hero Section */
-        #hero {
-            height: 100vh;
-            overflow: hidden;
-            position: relative;
-        }
-        #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-        .hero-content {
-            z-index: 2;
-        }
-        .hero-title span {
-            display: inline-block;
-        }
-        
-        /* Glassmorphism Card */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 1rem;
-        }
-
-        /* REWORKED Timeline Section */
-        #timeline {
-            height: 100vh;
-            overflow: hidden; /* Prevents content from spilling during pin */
-            position: relative;
-            background-image: url('https://images.unsplash.com/photo-1622464730923-7b20163a7965?q=80&w=2070&auto=format=fit=crop');
-            background-size: cover;
-            background-position: center;
-        }
-        #timeline::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(26, 32, 44, 0.6);
-            z-index: 1;
-        }
-        .timeline-chakra-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            opacity: 0; /* Initially hidden */
-            z-index: 2;
-        }
-        .timeline-chakra {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(calc(-50% + 50px), calc(-50% - 50px));
-            width: 80vh;
-            height: 80vh;
-            max-width: 80vw;
-            max-height: 80vw;
-            animation: spin 60s linear infinite;
-        }
-        .timeline-container {
-            display: flex;
-            width: 600%; /* 100% per panel */
-            height: 100vh;
-            position: relative;
-            z-index: 3;
-        }
-        .timeline-panel {
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-        }
-        .timeline-card {
-            max-width: 600px;
-            text-align: center;
-            background: rgba(26, 32, 44, 0.5);
-            backdrop-filter: blur(5px);
-            padding: 2.5rem;
-            border-radius: 1rem;
-        }
-
-        /* Gallery Section */
-        .gallery-image {
-            clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
-            transition: clip-path 0.3s ease-in-out, transform 0.3s ease-in-out;
-        }
-        .gallery-image:hover {
-            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-            transform: scale(1.05);
-        }
-
-        /* Tribute Section */
-        .tribute-card {
-            position: relative;
-            overflow: hidden;
-            border-radius: 1rem;
-            transition: transform 0.4s ease;
-        }
-        .tribute-card:hover {
-            transform: translateY(-10px);
-        }
-        .tribute-card .details {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            padding: 2rem 1.5rem 1.5rem;
-            transform: translateY(100%);
-            transition: transform 0.4s ease;
-        }
-        .tribute-card:hover .details {
-            transform: translateY(0);
-        }
-        .tribute-card .name {
-            position: absolute;
-            bottom: 1.5rem;
-            left: 1.5rem;
-            transition: opacity 0.4s ease;
-        }
-        .tribute-card:hover .name {
-            opacity: 0;
-        }
-
-        /* Voices Section */
-        #voices {
-            background-image: url('https://images.unsplash.com/photo-1598135753163-6167c1a1ad25?q=80&w=1932');
-            background-size: cover;
-            background-position: center center;
-            position: relative;
-        }
-        
-        /* Pledge Modal */
-        #pledge-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 60;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            pointer-events: none;
-            opacity: 0;
-        }
-        #pledge-modal {
-            position: relative;
-            transform: scale(0.7);
-        }
-        #confetti-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        /* General Animations */
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        .reveal-text {
-            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-        }
-    </style>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
-    <!-- Custom Cursor -->
     <div class="cursor"></div>
     <div class="cursor-dot"></div>
 
-    <!-- Preloader -->
     <div id="preloader">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Ashoka_Chakra.svg/1200px-Ashoka_Chakra.svg.png" alt="Ashoka Chakra" class="chakra">
         <div class="loading-text">AWAKENING BHARAT...</div>
     </div>
 
-    <!-- Header -->
     <header id="main-header" class="fixed top-0 left-0 w-full z-50 p-6 transition-all duration-300">
         <nav class="container mx-auto flex justify-between items-center">
             <div class="font-teko text-3xl font-bold tracking-wider">
@@ -308,7 +47,6 @@
     </header>
 
     <main>
-        <!-- Hero Section -->
         <section id="hero" class="flex items-center justify-center text-center text-white">
             <div id="particles-js"></div>
             <div class="hero-content relative">
@@ -319,7 +57,6 @@
             </div>
         </section>
 
-        <!-- About Section -->
         <section id="about" class="py-32 container mx-auto px-6">
             <div class="grid md:grid-cols-2 gap-16 items-center">
                 <div>
@@ -334,7 +71,6 @@
             </div>
         </section>
 
-        <!-- REWORKED Timeline Section -->
         <section id="timeline">
             <div class="timeline-chakra-container">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Ashoka_Chakra.svg/1200px-Ashoka_Chakra.svg.png" alt="Ashoka Chakra" class="timeline-chakra">
@@ -379,7 +115,6 @@
             </div>
         </section>
 
-        <!-- Gallery Section -->
         <section id="gallery" class="py-32 container mx-auto px-6">
             <h2 class="font-teko text-6xl uppercase text-center mb-16 reveal-text">The Glory of Bharat</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -389,11 +124,9 @@
             </div>
         </section>
 
-        <!-- Tribute Section -->
         <section id="tribute" class="py-32 container mx-auto px-6">
             <h2 class="font-teko text-6xl uppercase text-center mb-16 reveal-text">Architects of Freedom</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-                <!-- Card 1: Mahatma Gandhi -->
                 <div class="tribute-card">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Mahatma-Gandhi%2C_studio%2C_1931.jpg" alt="Mahatma Gandhi" class="w-full h-full object-cover">
                     <div class="name"><h3 class="font-teko text-3xl">Mahatma Gandhi</h3></div>
@@ -403,7 +136,6 @@
                         <p class="text-sm italic mt-4">"Be the change that you wish to see in the world."</p>
                     </div>
                 </div>
-                <!-- Card 2: Jawaharlal Nehru -->
                 <div class="tribute-card">
                     <img src="/assets/nehru.jpg" alt="Jawaharlal Nehru" class="w-full h-full object-cover">
                     <div class="name"><h3 class="font-teko text-3xl">Jawaharlal Nehru</h3></div>
@@ -413,7 +145,6 @@
                         <p class="text-sm italic mt-4">"Time is not measured by the passing of years, but by what one does..."</p>
                     </div>
                 </div>
-                <!-- Card 3: Sardar Patel -->
                 <div class="tribute-card">
                     <img src="/assets/Sardar_patel_(cropped).jpg.webp" alt="Sardar Vallabhbhai Patel" class="w-full h-full object-cover">
                     <div class="name"><h3 class="font-teko text-3xl">Sardar Patel</h3></div>
@@ -423,7 +154,6 @@
                         <p class="text-sm italic mt-4">"Little pools of water tend to become stagnant... but if they are joined together to form a big lake..."</p>
                     </div>
                 </div>
-                <!-- Card 4: Subhas Chandra Bose -->
                 <div class="tribute-card">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Subhas_Chandra_Bose_NRB.jpg/800px-Subhas_Chandra_Bose_NRB.jpg" alt="Subhas Chandra Bose" class="w-full h-full object-cover">
                     <div class="name"><h3 class="font-teko text-3xl">Subhas C. Bose</h3></div>
@@ -433,7 +163,6 @@
                         <p class="text-sm italic mt-4">"Give me blood, and I shall give you freedom!"</p>
                     </div>
                 </div>
-                <!-- Card 5: Bhagat Singh -->
                 <div class="tribute-card">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Bhagat_Singh_1929.jpg/800px-Bhagat_Singh_1929.jpg" alt="Bhagat Singh" class="w-full h-full object-cover">
                     <div class="name"><h3 class="font-teko text-3xl">Bhagat Singh</h3></div>
@@ -446,7 +175,6 @@
             </div>
         </section>
         
-        <!-- Voices Section -->
         <section id="voices" class="py-40 relative">
             <div class="absolute inset-0 bg-black opacity-60"></div>
             <div class="container mx-auto px-6 text-center relative z-10">
@@ -457,7 +185,6 @@
             </div>
         </section>
 
-        <!-- Vision Section -->
         <section id="vision" class="py-32">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="font-teko text-6xl uppercase reveal-text">Forging Tomorrow</h2>
@@ -471,13 +198,11 @@
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="py-16 text-center">
         <p class="font-teko text-2xl">Designed & Developed with <i class="ri-heart-fill text-red-500"></i> in India</p>
         <p class="text-slate-400">&copy; 2025. A tribute to the unbreakable spirit of India.</p>
     </footer>
 
-    <!-- Pledge Modal -->
     <div id="pledge-modal-overlay">
         <div id="pledge-modal" class="glass-card p-10 text-center max-w-md w-full relative">
             <canvas id="confetti-canvas"></canvas>
@@ -487,162 +212,9 @@
         </div>
     </div>
 
-    <!-- JavaScript Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
-    <script>
-        // --- PRELOADER ---
-        window.addEventListener('load', () => {
-            const preloader = document.getElementById('preloader');
-            gsap.to(preloader, {
-                opacity: 0,
-                duration: 1,
-                delay: 2, // Wait 2 seconds before starting the 1-second fade out (total 3s)
-                onComplete: () => preloader.style.display = 'none'
-            });
-            
-            // --- INITIALIZE ALL ANIMATIONS AFTER LOAD ---
-            initAnimations();
-        });
-
-        function initAnimations() {
-            gsap.registerPlugin(ScrollTrigger);
-
-            // --- CUSTOM CURSOR ---
-            const cursor = document.querySelector('.cursor');
-            const cursorDot = document.querySelector('.cursor-dot');
-            window.addEventListener('mousemove', e => {
-                gsap.to(cursor, { duration: 0.2, x: e.clientX, y: e.clientY });
-                gsap.to(cursorDot, { duration: 0.01, x: e.clientX, y: e.clientY });
-            });
-            document.querySelectorAll('a, button').forEach(el => {
-                el.addEventListener('mouseenter', () => gsap.to(cursor, { scale: 2, background: 'rgba(255,255,255,0.5)' }));
-                el.addEventListener('mouseleave', () => gsap.to(cursor, { scale: 1, background: 'var(--saffron)' }));
-            });
-
-            // --- PARTICLES.JS HERO BACKGROUND ---
-            particlesJS('particles-js', {
-                "particles": { "number": { "value": 60, "density": { "enable": true, "value_area": 800 } }, "color": { "value": ["#FF9933", "#FFFFFF", "#138808"] }, "shape": { "type": "circle" }, "opacity": { "value": 0.6, "random": true }, "size": { "value": 4, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1, "direction": "none", "random": true, "straight": false, "out_mode": "out" } },
-                "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "bubble" }, "onclick": { "enable": true, "mode": "repulse" } }, "modes": { "bubble": { "distance": 250, "size": 8, "duration": 2, "opacity": 0.8 }, "repulse": { "distance": 400, "duration": 0.4 } } }
-            });
-
-            // --- HERO TEXT ANIMATION ---
-            gsap.from(".hero-title span", { y: 150, skewY: 7, stagger: 0.1, duration: 1.5, ease: "power4.out", delay: 2.5 });
-            gsap.from(".hero-subtitle", { opacity: 0, y: 20, duration: 1, ease: "power2.out", delay: 3.5 });
-            gsap.from("#main-header", { y: -100, duration: 1, ease: "power2.out", delay: 4 });
-
-            // --- HORIZONTAL SCROLL TIMELINE (FIXED) ---
-            let panels = gsap.utils.toArray(".timeline-panel");
-            gsap.to(panels, {
-                xPercent: -100 * (panels.length - 1),
-                ease: "none",
-                scrollTrigger: {
-                    trigger: "#timeline",
-                    pin: true,
-                    scrub: 1,
-                    snap: 1 / (panels.length - 1),
-                    end: () => "+=" + (document.querySelector(".timeline-container").offsetWidth - window.innerWidth)
-                }
-            });
-
-            // --- TIMELINE CHAKRA VISIBILITY ---
-            gsap.to(".timeline-chakra-container", {
-                opacity: 0.15,
-                scrollTrigger: {
-                    trigger: "#timeline",
-                    start: "top top",
-                    end: "bottom bottom",
-                    scrub: true
-                }
-            });
-            
-            // --- GENERAL SCROLL-BASED REVEAL ANIMATIONS ---
-            gsap.utils.toArray('.reveal-text').forEach(elem => {
-                gsap.fromTo(elem, 
-                    { autoAlpha: 0, y: 50, clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)' }, 
-                    { autoAlpha: 1, y: 0, clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)', duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: elem, start: 'top 85%', toggleActions: 'play none none none' } }
-                );
-            });
-            
-            // --- GALLERY IMAGE PARALLAX ---
-            gsap.utils.toArray('.gallery-image').forEach(img => {
-                gsap.to(img, { yPercent: -20, ease: 'none', scrollTrigger: { trigger: img.parentElement, scrub: 0.5 } });
-            });
-
-            // --- VOICES SECTION PARALLAX ---
-            gsap.to('#voices', {
-                backgroundPosition: 'center 20%',
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: '#voices',
-                    scrub: true
-                }
-            });
-
-            // --- PLEDGE MODAL & CONFETTI ---
-            const pledgeButton = document.getElementById('pledge-button');
-            const closeModalButton = document.getElementById('close-modal-button');
-            const modalOverlay = document.getElementById('pledge-modal-overlay');
-            const modal = document.getElementById('pledge-modal');
-            const canvas = document.getElementById('confetti-canvas');
-            const ctx = canvas.getContext('2d');
-            let confettiParticles = [];
-
-            const showModal = () => {
-                gsap.to(modalOverlay, { autoAlpha: 1, duration: 0.5, ease: 'power2.out' });
-                gsap.to(modal, { scale: 1, duration: 0.5, ease: 'back.out(1.7)' });
-                modalOverlay.style.pointerEvents = 'auto';
-                launchConfetti();
-            };
-
-            const hideModal = () => {
-                gsap.to(modalOverlay, { autoAlpha: 0, duration: 0.3, ease: 'power2.in' });
-                modalOverlay.style.pointerEvents = 'none';
-            };
-
-            pledgeButton.addEventListener('click', showModal);
-            closeModalButton.addEventListener('click', hideModal);
-            modalOverlay.addEventListener('click', (e) => {
-                if (e.target === modalOverlay) {
-                    hideModal();
-                }
-            });
-
-            // Confetti Logic
-            const colors = ['#FF9933', '#FFFFFF', '#138808'];
-            const launchConfetti = () => {
-                canvas.width = modal.offsetWidth;
-                canvas.height = modal.offsetHeight;
-                confettiParticles = [];
-                for (let i = 0; i < 100; i++) {
-                    confettiParticles.push(createParticle(canvas.width / 2, canvas.height));
-                }
-                animateConfetti();
-            };
-
-            const createParticle = (x, y) => ({
-                x: x, y: y,
-                color: colors[Math.floor(Math.random() * colors.length)],
-                radius: Math.random() * 3 + 2,
-                vx: (Math.random() - 0.5) * 8,
-                vy: Math.random() * -15 - 5,
-                alpha: 1, gravity: 0.3
-            });
-
-            const animateConfetti = () => {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                confettiParticles.forEach((p, i) => {
-                    p.vy += p.gravity; p.x += p.vx; p.y += p.vy; p.alpha -= 0.01;
-                    if (p.y > canvas.height || p.alpha <= 0) confettiParticles.splice(i, 1);
-                    ctx.globalAlpha = p.alpha; ctx.beginPath(); ctx.fillStyle = p.color;
-                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2); ctx.fill();
-                });
-                if (confettiParticles.length > 0) requestAnimationFrame(animateConfetti);
-                else ctx.clearRect(0, 0, canvas.width, canvas.height);
-            };
-        }
-    </script>
+    <script src="/script.js"></script>
 </body>
 </html>
